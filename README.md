@@ -30,6 +30,77 @@ Binary packages are available in the [releases page](https://github.com/mt-sync-
 go get github.com/mt-sync-theme/mt-sync-theme
 ```
 
+## Setup
+
+1. Install the plug-in [SyncedTheme](https://github.com/mt-sync-theme/mt-plugin-SyncedTheme/releases) to your Movable Type.
+1. (Optinal) Link templates to the files of theme directory for a blog via [SyncedTheme](https://github.com/mt-sync-theme/mt-plugin-SyncedTheme/releases).
+1. (Optinal) Export the theme from a blog.
+1. Download a (exported or existing) theme to your local environment.
+1. (Optinal) Create the `mt-sync-theme.yaml` ([example](https://github.com/mt-sync-theme/mt-sync-theme/blob/master/example/mt-sync-theme.yaml)) at your local theme directory (a place with theme.yaml).
+    * These configuration variable can be specified via command-line options.
+1. Ready to run `mt-sync-theme`.
+
+
+## Usage
+
+### Overview
+
+The `mt-sync-theme` takes a command, like this.
+```
+mt-sync-theme preview
+```
+
+#### Available commands
+
+* preview
+    * Generate a preview page when a file is modified, and open generated preview page via specified handler.
+    * In this command, `mt-sync-theme` (and `SyncedTheme`) does not make change to production environment.
+* on-the-fly
+    * Rebuild a published page when a file is modified, and open updated page via specified handler.
+    * In this command, `mt-sync-theme` makes change to production environment. This command should be used in developing stage of the site.
+* sync
+    * Synchronize local theme files to the remote MT.
+* apply
+    * Re-apply current theme to the blogs with which this theme is related.
+    * Only these importer will be applied.
+        * template_set
+        * static_files
+        * custom_fields
+            * However, application of the custom-field goes wrong in many cases.
+* rebuild
+    * Rebuild blogs with which current theme is related.
+
+### preview
+
+```
+mt-sync-theme preview
+```
+
+### on-the-fly
+
+```
+mt-sync-theme on-the-fly
+```
+
+### sync
+
+```
+mt-sync-theme sync
+```
+
+### apply
+
+```
+mt-sync-theme apply
+```
+
+### rebuild
+
+```
+mt-sync-theme rebuild
+```
+
+
 ## Command-Line Options
 
 ```
