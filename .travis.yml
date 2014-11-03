@@ -15,4 +15,4 @@ script:
 #  - goveralls -coverprofile=coverage.out -service travis-ci -repotoken $COVERALLS_TOKEN
 after_success:
   - test -z "$TAG" || eval make -f build/Makefile $OSARCHS
-  - test -z "$TAG" || ghr --username usualoma --token $GITHUB_TOKEN --replace --prerelease --debug $TAG dist/
+  - test -z "$TAG" || ghr --username mt-sync-theme --token $GITHUB_TOKEN --replace --prerelease --debug $TAG dist/
