@@ -1,0 +1,3 @@
+endpoint: http://example.com/mt/mt-data-api.cgi
+username: Melody
+url_handler: osascript -e 'tell application "Safari" to set the URL of the front document to "$URL"'
