@@ -62,15 +62,15 @@ mt-sync-theme preview
     * Synchronize local theme files to the remote MT.
 * apply
     * Re-apply current theme to the blogs with which this theme is related.
-    * Only these importer will be applied.
-        * template_set
-        * static_files
-        * custom_fields
-            * However, application of the custom-field goes wrong in many cases.
 * rebuild
     * Rebuild blogs with which current theme is related.
 
 ### preview
+
+* Watch filesystem, and generate a preview page when a file is modified.
+    * This command enters to the loop of watching filesystem. You can get quit of this loop by Ctrl-C.
+* If modified file is a template (index, or archive), open preview URL via "url_handler".
+    * You can preview a module template through a template that is specified by "preview_via".
 
 ```
 mt-sync-theme preview
@@ -78,11 +78,19 @@ mt-sync-theme preview
 
 ### on-the-fly
 
+* Watch filesystem, and rebuild a page for preview when a file is modified.
+    * This command enters to the loop of watching filesystem. You can get quit of this loop by Ctrl-C.
+* You should rebuilt with current templates at least once, before running this command.
+* If modified file is a template (index, or archive), open preview URL via "url_handler".
+    * You can handle a module template through a template that is specified by "preview_via".
+
 ```
 mt-sync-theme on-the-fly
 ```
 
 ### sync
+
+* Synchronize local theme files to the remote MT.
 
 ```
 mt-sync-theme sync
@@ -90,11 +98,20 @@ mt-sync-theme sync
 
 ### apply
 
+* Re-apply current theme to the blogs with which this theme is related.
+* Only these importer will be applied.
+    * template_set
+    * static_files
+    * custom_fields
+        * However, application of the custom-field goes wrong in many cases.
+
 ```
 mt-sync-theme apply
 ```
 
 ### rebuild
+
+* Rebuild blogs with which current theme is related.
 
 ```
 mt-sync-theme rebuild
