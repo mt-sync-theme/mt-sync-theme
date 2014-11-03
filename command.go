@@ -6,11 +6,21 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
+
+func getPrefixLength(theme Theme) int {
+	themeDir := strings.TrimRight(theme.Directory, "/")
+	if themeDir == "." {
+		return 0
+	} else {
+		return len(themeDir) + 1
+	}
+}
 
 func doWatchCommand(actions []string, theme Theme, client MTSyncThemeClient, opts *cmdOptions, remapper NameRemapper, errorWriter io.Writer, done chan bool) error {
 	events := make(chan fsnotify.Event)
-	prefixLength := len(theme.Directory) + 1
+	prefixLength := getPrefixLength(theme)
 	go func() {
 		for {
 			event := <-events
@@ -45,7 +55,7 @@ func doOnTheFly(theme Theme, client MTSyncThemeClient, opts *cmdOptions, errorWr
 
 func doSyncDirectory(directory string, theme Theme, client MTSyncThemeClient, opts *cmdOptions, remapper NameRemapper) error {
 	paths := []string{}
-	prefixLength := len(theme.Directory) + 1
+	prefixLength := getPrefixLength(theme)
 	err := filepath.Walk(directory, func(path string, stat os.FileInfo, err error) error {
 		if err != nil || stat.IsDir() {
 			return nil

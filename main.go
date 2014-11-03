@@ -182,7 +182,10 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 	log.Println("Command: " + command)
 	switch command {
 	case "preview":
-		doSyncDirectory(path.Join(theme.Directory, "templates"), theme, client, opts, previewNameRemapper)
+		err = doSyncDirectory(path.Join(theme.Directory, "templates"), theme, client, opts, previewNameRemapper)
+		if err != nil {
+			log.Println(err)
+		}
 		done := make(chan bool)
 		err = doPreview(theme, client, opts, errorWriter, done)
 	case "on-the-fly":
