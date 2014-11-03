@@ -10,7 +10,7 @@ import (
 )
 
 func getPrefixLength(theme Theme) int {
-	themeDir := strings.TrimRight(theme.Directory, "/")
+	themeDir := strings.TrimRight(theme.Directory, string(os.PathSeparator))
 	if themeDir == "." {
 		return 0
 	} else {
