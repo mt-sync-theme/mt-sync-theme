@@ -13,13 +13,20 @@ This is a command-line tool for the Movable Type. This program can synchronize f
 
 ## Installation
 
+### Mac OS X / Homebrew
+
+```sh
+brew tap mt-sync-theme/mt-sync-theme
+brew install mt-sync-theme
+```
+
 ### Binary
 
 Binary packages are available in the [releases page](https://github.com/mt-sync-theme/mt-sync-theme/releases).
 
 ### go get
 
-```
+```sh
 go get github.com/mt-sync-theme/mt-sync-theme
 ```
 
