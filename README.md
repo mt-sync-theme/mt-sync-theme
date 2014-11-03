@@ -54,7 +54,7 @@ mt-sync-theme preview
 
 * preview
     * Generate a preview page when a file is modified, and open generated preview page via specified handler.
-    * In this command, `mt-sync-theme` (and `SyncedTheme`) does not make change to production environment.
+    * In this command, `mt-sync-theme` does not make change to production environment.
 * on-the-fly
     * Rebuild a published page when a file is modified, and open updated page via specified handler.
     * In this command, `mt-sync-theme` makes change to production environment. This command should be used in developing stage of the site.
