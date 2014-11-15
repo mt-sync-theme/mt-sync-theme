@@ -14,7 +14,6 @@ import (
 	"net/url"
 	"os"
 	"path"
-	"reflect"
 	"strings"
 )
 
@@ -205,8 +204,6 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 		p.WriteHelp(errorWriter)
 		return 1
 	}
-
-	fmt.Println(reflect.TypeOf(err))
 
 	if err != nil {
 		log.Println(err)
