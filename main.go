@@ -61,14 +61,14 @@ func getPassword() (string, error) {
 	var err error
 	var password []byte
 
-	passwordFile := os.Getenv("MT_SYNCED_THEME_PASSWORD_FILE")
+	passwordFile := os.Getenv("MT_SYNC_THEME_PASSWORD_FILE")
 	if passwordFile != "" {
 		password, err = ioutil.ReadFile(passwordFile)
 		if err != nil {
 			return "", errors.New(fmt.Sprintf("Can not read password from password file: %s\n", passwordFile))
 		}
 
-		if os.Getenv("MT_SYNCED_THEME_PASSWORD_FILE_REMOVE") != "" {
+		if os.Getenv("MT_SYNC_THEME_PASSWORD_FILE_REMOVE") != "" {
 			err = os.Remove(passwordFile)
 			if err != nil {
 				return "", errors.New(fmt.Sprintf("Can not remove password file: %s\n", passwordFile))
