@@ -210,6 +210,15 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 
 	if err != nil {
 		log.Println(err)
+		if _, ok := err.(*url.Error); ok {
+			return 101
+		} else if _, ok := err.(*json.SyntaxError); ok {
+			return 102
+		} else if e, ok := err.(*dataapi.Error); ok {
+			return 150 + int(e.Code)
+		} else {
+			return 1
+		}
 	}
 
 	return 0
