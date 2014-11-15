@@ -3,7 +3,6 @@ package main
 import (
 	"gopkg.in/fsnotify.v1"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,8 +18,11 @@ func getPrefixLength(theme Theme) int {
 }
 
 func doWatchCommand(actions []string, theme Theme, client MTSyncThemeClient, opts *cmdOptions, remapper NameRemapper, errorWriter io.Writer, done chan bool) error {
+	var result error
+
 	events := make(chan fsnotify.Event)
 	prefixLength := getPrefixLength(theme)
+
 	go func() {
 		for {
 			event := <-events
@@ -29,12 +31,14 @@ func doWatchCommand(actions []string, theme Theme, client MTSyncThemeClient, opt
 			if event.Op&(fsnotify.Create|fsnotify.Write) != 0 {
 				err := client.PutFiles(theme, []string{name}, actions, newUrlHandler(opts), remapper)
 				if err != nil {
-					log.Println(err)
+					result = err
+					done <- true
 				}
 			} else if event.Op&(fsnotify.Remove|fsnotify.Rename) != 0 {
 				err := client.DeleteFiles(theme, []string{name}, actions, remapper)
 				if err != nil {
-					log.Println(errorWriter, err)
+					result = err
+					done <- true
 				}
 			}
 		}
@@ -42,7 +46,7 @@ func doWatchCommand(actions []string, theme Theme, client MTSyncThemeClient, opt
 
 	Watch(opts.OptThemeDirectory, events, done)
 
-	return nil
+	return result
 }
 
 func doPreview(theme Theme, client MTSyncThemeClient, opts *cmdOptions, errorWriter io.Writer, done chan bool) error {

@@ -1,16 +1,20 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/howeyc/gopass"
 	"github.com/jessevdk/go-flags"
+	"github.com/usualoma/mt-data-api-sdk-go"
 	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"
 	"log"
+	"net/url"
 	"os"
 	"path"
+	"reflect"
 	"strings"
 )
 
@@ -183,11 +187,10 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 	switch command {
 	case "preview":
 		err = doSyncDirectory(path.Join(theme.Directory, "templates"), theme, client, opts, previewNameRemapper)
-		if err != nil {
-			log.Println(err)
+		if err == nil {
+			done := make(chan bool)
+			err = doPreview(theme, client, opts, errorWriter, done)
 		}
-		done := make(chan bool)
-		err = doPreview(theme, client, opts, errorWriter, done)
 	case "on-the-fly":
 		done := make(chan bool)
 		err = doOnTheFly(theme, client, opts, errorWriter, done)
@@ -202,6 +205,8 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 		p.WriteHelp(errorWriter)
 		return 1
 	}
+
+	fmt.Println(reflect.TypeOf(err))
 
 	if err != nil {
 		log.Println(err)
