@@ -6,13 +6,13 @@ import (
 
 func TestClientOptions(t *testing.T) {
 	opts := clientOptions{
-        cmdOptions: &cmdOptions{
-	        OptEndpoint: "http://www.example.com/mt/mt-data-api.cgi",
-	        OptApiVersion: "1",
-	        OptClientId: "go-test",
-	        OptUsername: "Melody",
-        },
-        PasswordData: "password",
+		cmdOptions: &cmdOptions{
+			OptEndpoint:   "http://www.example.com/mt/mt-data-api.cgi",
+			OptApiVersion: "1",
+			OptClientId:   "go-test",
+			OptUsername:   "Melody",
+		},
+		PasswordData: "password",
 	}
 
 	if opts.Endpoint() != "http://www.example.com/mt/mt-data-api.cgi" {
