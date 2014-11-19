@@ -4,7 +4,9 @@ import (
 	"github.com/usualoma/mt-data-api-sdk-go"
 	"io/ioutil"
 	"log"
+	"os"
 	"path"
+	"strings"
 )
 
 type MTSyncThemeClient struct {
@@ -65,9 +67,14 @@ func (c *MTSyncThemeClient) PutFiles(theme Theme, names []string, actions []stri
 			}
 
 			name := names[i]
-			content, err := ioutil.ReadFile(path.Join(theme.Directory, name))
+			file := path.Join(theme.Directory, name)
+			content, err := ioutil.ReadFile(file)
 			if err != nil {
-				return err
+				if _, e := os.Stat(file); os.IsNotExist(e) {
+					continue
+				} else {
+					return err
+				}
 			}
 
 			if remapper != nil {
