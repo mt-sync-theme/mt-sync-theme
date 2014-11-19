@@ -18,7 +18,7 @@ import (
 	"strings"
 )
 
-var version = "v0.1.3"
+var version = "v0.1.4"
 
 type cmdOptions struct {
 	OptHelp           bool   `short:"h" long:"help" description:"Show this help message and exit"`
