@@ -14,6 +14,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"runtime"
 	"strings"
 )
 
@@ -78,11 +79,12 @@ func getPassword() (string, error) {
 			}
 		}
 	} else {
+		isWindows := runtime.GOOS == "windows"
 		stat, err := os.Stdin.Stat()
-		if err != nil {
+		if !isWindows && err != nil {
 			panic(err)
 		}
-		if stat.Mode()&os.ModeNamedPipe == 0 {
+		if isWindows || stat.Mode()&os.ModeNamedPipe == 0 {
 			fmt.Printf("Password: ")
 			password = gopass.GetPasswd()
 		} else {
