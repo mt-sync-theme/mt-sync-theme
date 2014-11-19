@@ -20,7 +20,7 @@ brew tap mt-sync-theme/mt-sync-theme
 brew install mt-sync-theme
 ```
 
-### Binary
+### Binary (Please choose this option if you use Windows)
 
 Binary packages are available in the [releases page](https://github.com/mt-sync-theme/mt-sync-theme/releases).
 
