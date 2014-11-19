@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"os/exec"
 	"path"
@@ -20,6 +21,7 @@ func previewNameRemapper(name string) string {
 func newUrlHandler(opts *cmdOptions) URLHandler {
 	handlerRegexp, _ := regexp.Compile("'([^']*)'|\"([^\"]*)\"|(\\S+)")
 	envRegexp, _ := regexp.Compile("\\$\\w+")
+	var currentCommand *exec.Cmd
 
 	return func(url string) error {
 		if opts.OptUrlHandler == "" {
@@ -55,7 +57,18 @@ func newUrlHandler(opts *cmdOptions) URLHandler {
 			parts = []string{}
 		}
 
-		_, err := exec.Command(head, parts...).Output()
-		return err
+		if currentCommand != nil {
+			currentCommand.Process.Kill()
+		}
+		currentCommand = exec.Command(head, parts...)
+
+		go func() {
+			out, err := currentCommand.CombinedOutput()
+			if err != nil {
+				log.Printf("%q %q: %s: %s", head, parts, err, out)
+			}
+		}()
+
+		return nil
 	}
 }
