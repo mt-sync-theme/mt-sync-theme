@@ -1,0 +1,5 @@
+endpoint: http://example.com/mt/mt-data-api.cgi
+username: Melody
+# https://support.mozilla.org/ja/questions/926745
+# recommend for this example: Setting "browser.link.open_newwindow.override.external" to 1 in about:conifg.
+url_handler: "'C:/Program Files (x86)/Mozilla Firefox/firefox.exe' -remote 'openURL($URL)'"
