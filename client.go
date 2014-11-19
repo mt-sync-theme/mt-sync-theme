@@ -80,6 +80,8 @@ func (c *MTSyncThemeClient) PutFiles(theme Theme, names []string, actions []stri
 			if remapper != nil {
 				name = remapper(name)
 			}
+			// Windows
+			name = strings.Replace(name, string(os.PathSeparator), "/", -1)
 
 			files = append(files, FileData{
 				Path:    name,
@@ -145,6 +147,9 @@ func (c *MTSyncThemeClient) DeleteFiles(theme Theme, names []string, actions []s
 
 	files := []FileData{}
 	for _, name := range names {
+		// Windows
+		name = strings.Replace(name, string(os.PathSeparator), "/", -1)
+
 		files = append(files, FileData{
 			Path:   name,
 			Action: "delete",
