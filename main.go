@@ -111,6 +111,11 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 		return 0
 	}
 
+	if opts.OptVersion {
+		fmt.Fprintf(errorWriter, "mt-sync-theme: %s\n", version)
+		return 0
+	}
+
 	loadConfigFile := func(file string) error {
 		yamlData, err := ioutil.ReadFile(file)
 		if err != nil {
@@ -151,11 +156,6 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 		fmt.Fprintln(errorWriter, "Both '--endpoint' and '--username' are required.\n")
 		p.WriteHelp(errorWriter)
 		return 1
-	}
-
-	if opts.OptVersion {
-		fmt.Fprintf(errorWriter, "mt-sync-theme: %s\n", version)
-		return 0
 	}
 
 	command := "preview"
