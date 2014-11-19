@@ -36,7 +36,7 @@ go get github.com/mt-sync-theme/mt-sync-theme
 1. (Optinal) Link templates to the files of theme directory for a blog via [SyncedTheme](https://github.com/mt-sync-theme/mt-plugin-SyncedTheme/releases).
 1. (Optinal) Export the theme from a blog.
 1. Download a (exported or existing) theme to your local environment.
-1. (Optinal) Create the `mt-sync-theme.yaml` ([example](https://github.com/mt-sync-theme/mt-sync-theme/blob/master/example/mt-sync-theme.yaml)) at your local theme directory (a place with theme.yaml).
+1. (Optinal) Create the `mt-sync-theme.yaml` at your local theme directory (a place with theme.yaml). examples: [for Mac](https://github.com/mt-sync-theme/mt-sync-theme/blob/master/example/mt-sync-theme.yaml), [for Windows](https://github.com/mt-sync-theme/mt-sync-theme/blob/master/example/windows/mt-sync-theme.yaml)
     * These configuration variable can be specified via command-line options.
 1. Ready to run `mt-sync-theme`.
 
