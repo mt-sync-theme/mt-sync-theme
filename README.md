@@ -3,6 +3,11 @@
 This is a command-line tool for the Movable Type. This program can synchronize files, and generate preview, and apply theme.
 
 
+## Movie
+
+[![Demonstration movie](http://img.youtube.com/vi/UQ6CqNzc_Dg/0.jpg)](http://youtu.be/UQ6CqNzc_Dg)
+
+
 ## Features
 
 * Can synchronize local theme files to the remote MT.
@@ -70,7 +75,7 @@ mt-sync-theme preview
 * Watch filesystem, and generate a preview page when a file is modified.
     * This command enters to the loop of watching filesystem. You can get quit of this loop by Ctrl-C.
 * If modified file is a template (index, or archive), open preview URL via "url_handler".
-    * You can preview a module template through a template that is specified by "preview_via".
+    * You can preview a module template through a template that is specified by "[preview_via](#preview_via)".
 
 ```
 mt-sync-theme preview
@@ -82,7 +87,7 @@ mt-sync-theme preview
     * This command enters to the loop of watching filesystem. You can get quit of this loop by Ctrl-C.
 * You should rebuilt with current templates at least once, before running this command.
 * If modified file is a template (index, or archive), open preview URL via "url_handler".
-    * You can handle a module template through a template that is specified by "preview_via".
+    * You can handle a module template through a template that is specified by "[preview_via](#preview_via)".
 
 ```
 mt-sync-theme on-the-fly
@@ -136,6 +141,26 @@ Application Options:
       --theme-directory= Theme directory (.)
       --url-handler=     URL handler
 ```
+
+
+## Advanced configuration
+
+### preview_via
+
+You can also specify a template for preview explicitly, to any template. As follows.
+
+```yaml
+--- 
+elements: 
+  template_set: 
+    data: 
+      templates: 
+        module: 
+          entry_summary: 
+            label: Entry Summary
+            preview_via: main_index
+```
+
 
 ## LICENSE
 
