@@ -104,6 +104,9 @@ func (c *MTSyncThemeClient) PutFiles(theme Theme, names []string, actions []stri
 		if err != nil {
 			return err
 		}
+		if result.Result.Error != nil {
+			return result.Result.Error
+		}
 
 		for _, action := range result.Actions {
 			for _, url := range action.Urls {
@@ -167,6 +170,9 @@ func (c *MTSyncThemeClient) DeleteFiles(theme Theme, names []string, actions []s
 		&result)
 	if err != nil {
 		return err
+	}
+	if result.Result.Error != nil {
+		return result.Result.Error
 	}
 
 	return nil

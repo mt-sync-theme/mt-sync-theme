@@ -215,6 +215,14 @@ func Run(cmdArgs []string, errorWriter io.Writer) int {
 			return 102
 		} else if e, ok := err.(*dataapi.Error); ok {
 			return 150 + int(e.Code)
+		} else if e, ok := err.(*dataapi.ResultError); ok {
+			c := e.Code
+			if c >= 400 && c <= 499 {
+				return 170 + c - 400
+			} else if e.Code >= 500 && e.Code <= 599 {
+				return 180 + c - 500
+			}
+			return 199
 		} else {
 			return 1
 		}
