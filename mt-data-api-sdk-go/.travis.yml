@@ -1,0 +1,18 @@
+language: go
+go:
+  - 1.3
+env:
+  - PATH=/home/travis/gopath/bin:$PATH OSARCHS="darwin/amd64 linux/386 linux/amd64 windows/amd64" TAG="`git describe --exact-match 2>/dev/null`"
+before_install:
+  - test -z "$TAG" || go get github.com/mitchellh/gox
+  - test -z "$TAG" || gox -build-toolchain -osarch="$OSARCHS"
+  - test -z "$TAG" || go get github.com/tcnksm/ghr
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/mattn/goveralls
+  - go get code.google.com/p/go.tools/cmd/cover
+script:
+  - go test -v -covermode=count -coverprofile=coverage.out ./...
+  - goveralls -coverprofile=coverage.out -service travis-ci -repotoken $COVERALLS_TOKEN
+after_success:
+  - test -z "$TAG" || eval make -f build/Makefile $OSARCHS
+  - test -z "$TAG" || ghr --username usualoma --token $GITHUB_TOKEN --replace --prerelease --debug $TAG dist/
