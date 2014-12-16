@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/howeyc/gopass"
 	"github.com/jessevdk/go-flags"
-	"github.com/usualoma/mt-data-api-sdk-go"
+	"github.com/mt-sync-theme/mt-sync-theme/mt-data-api-sdk-go"
 	"gopkg.in/yaml.v2"
 	"io"
 	"io/ioutil"

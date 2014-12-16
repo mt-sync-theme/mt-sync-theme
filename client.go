@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/usualoma/mt-data-api-sdk-go"
+	"github.com/mt-sync-theme/mt-sync-theme/mt-data-api-sdk-go"
 	"io/ioutil"
 	"log"
 	"os"
